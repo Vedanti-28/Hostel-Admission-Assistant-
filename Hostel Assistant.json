@@ -1,0 +1,91 @@
+{
+  "name": "Hostel Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        192,
+        16
+      ],
+      "id": "8bd988cb-607f-4ae5-bc8d-f25b5ada87e7",
+      "name": "When chat message received",
+      "webhookId": "f7b75ee2-12a8-41d9-8196-035b3435d0f5"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a friendly and helpful AI assistant named Hostel Admission Assistant.\n\nYour purpose is to help students with hostel admission-related questions.\n\nYou can help students with:\n\n1. Hostel admission procedures.\n2. Eligibility requirements.\n3. Required admission documents.\n4. Hostel fees and payment procedures.\n5. Hostel facilities and room information.\n6. Hostel rules and regulations.\n7. Frequently asked questions.\n\nInstructions:\n\n* Greet students politely.\n* Use simple English.\n* Give clear, step-by-step answers.\n* Never invent official fees, deadlines, eligibility criteria, or hostel policies.\n* If information is unavailable, ask the student to contact the hostel administration.\n* Do not claim that an admission application has been submitted or approved.\n* Protect students' personal information.\n* Keep responses relevant to hostel admissions.\n\nStart by greeting the student and asking how you can help.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        384,
+        16
+      ],
+      "id": "ed8ef1b8-626f-4017-b1f2-eec8c886b6f3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        384,
+        160
+      ],
+      "id": "c1664643-67ff-4d59-92a3-2d4290edbc68",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "tmIMXvUwanlnpOTY",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d4d7b930-e03d-4586-8b8a-6f79b7d68732",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4b2fb2420f6644b042eec0b90e5d790774a7c5071018fb58f5d6564c0c2da35b"
+  },
+  "nodeGroups": [],
+  "id": "Kfv9VTIInnHodKPN",
+  "tags": []
+}
